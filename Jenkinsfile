@@ -4,17 +4,19 @@ pipeline {
     stages {
        stage('Checkout') {
             steps {
-              
+              script{
+                checkout scm
+              }
             }
         }
         stage('Build') {
             steps {
-              sh "echo Build"
+              echo "Build"
             }
         }
       stage('Deploy') {
             steps {
-              sh "echo Deploy"
+              echo "Deploy"
             }
         }
     }
