@@ -16,9 +16,11 @@ pipeline {
 
       stage('push') {
             steps {
+              script{
               withCredentials([usernamePassword(credentialsId:'docker-cred', usernameVariable:'USER', passwordVariable:'PASS')]){
                 sh "docker login -u ${USER} -p ${PASS}"
                 sh "docker push 5shan/angular-docker:2.0"
+                }
               }
             }
         }
