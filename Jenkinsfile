@@ -9,19 +9,10 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh "docker build -t angular-docker ."
-                sh "docker tag angular-docker 5shan/angular-docker:2.0"
-            }
-        }
-
-        stage('Push') {
-            steps {
-                script {
-                    withCredentials([usernamePassword(credentialsId: 'docker-cred', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
-                        sh "echo ${PASS} | docker login -u ${USER} --password-stdin"
-                        sh "docker push 5shan/angular-docker:2.0"
-                    }
-                }
+              docker.withRegistry('', 'docker-cred') {
+              def angularapp = docker.build("5shan/angular-docker:2.0")
+              angularapp.push()
+              }
             }
         }
 
