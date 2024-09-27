@@ -19,13 +19,14 @@ pipeline {
         }
 
         stage('Deploy') {
-            steps {
-                sshagent(['ubuntu-veroke']) {
-                    sh '''
-                    ssh -o StrictHostKeyChecking=no ec2-52-33-245-19.us-west-2.compute.amazonaws.com" docker run -d -p 4200:4200 5shan/angular-docker:2.0"
-                    '''
-                }
-            }
+    steps {
+        sshagent(['ubuntu-veroke']) {
+            sh '''
+            ssh -o StrictHostKeyChecking=no ec2-52-33-245-19.us-west-2.compute.amazonaws.com "docker run -d -p 4200:4200 5shan/angular-docker:2.0"
+            '''
         }
+    }
+}
+
     }
 }
