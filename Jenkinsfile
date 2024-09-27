@@ -9,9 +9,11 @@ pipeline {
         }
         stage('Build') {
             steps {
-              docker.withRegistry('', 'docker-cred') {
-              def angularapp = docker.build("5shan/angular-docker:2.0")
-              angularapp.push()
+              script{
+                docker.withRegistry('', 'docker-cred') { 
+                  def angularapp = docker.build("5shan/angular-docker:2.0")
+                  angularapp.push()
+                }         
               }
             }
         }
